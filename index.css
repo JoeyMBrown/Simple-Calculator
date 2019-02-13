@@ -1,0 +1,39 @@
+#alertBox {
+    border: solid black 2px;
+    position: relative;
+    margin: auto;
+    width: 300px;
+    height: 100px;
+}
+#alertText {
+    border: solid black .5px;
+    position: relative;
+    text-align: right;
+    top: 0px;
+    right: 0px;
+}
+#calculatorContainer {
+    position: relative;
+    margin: auto;
+    border: solid black .5px;
+}
+#calculatorTable{
+    position: relative;
+    text-align: center;
+    margin: auto;
+    border: solid black 2px;
+    border-top: none;
+    width: 304px;
+    height: 300px;
+}
+.calcLeft {
+
+}
+
+.calcMiddle {
+
+}
+
+.calcRight {
+
+}
