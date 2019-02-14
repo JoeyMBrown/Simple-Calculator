@@ -1,16 +1,19 @@
-#alertBox {
+#inputBox {
     border: solid black 2px;
     position: relative;
     margin: auto;
     width: 300px;
     height: 100px;
 }
-#alertText {
+#inputText {
     border: solid black .5px;
     position: relative;
     text-align: right;
     top: 0px;
     right: 0px;
+}
+#answerText {
+
 }
 #calculatorContainer {
     position: relative;
@@ -26,14 +29,64 @@
     width: 304px;
     height: 300px;
 }
-.calcLeft {
 
+#button1 {
+    border: solid black 1px;
 }
 
-.calcMiddle {
-
+#button2 {
+    border: solid black 1px;
+    width: 95px;
 }
 
-.calcRight {
+#button3 {
+    border: solid black 1px;
+}
 
+#button4 {
+    border: solid black 1px;
+}
+
+#button5 {
+    border: solid black 1px;
+}
+
+#button6 {
+    border: solid black 1px;
+}
+
+#button7 {
+    border: solid black 1px;
+}
+
+#button8 {
+    border: solid black 1px;
+}
+
+#button9 {
+    border: solid black 1px;
+}
+
+#button0 {
+    border: solid black 1px;
+}
+/*+ button*/
+#button10 {
+    border: solid black 1px;
+}
+/*- button*/
+#button11 {
+    border: solid black 1px;
+}
+/* / button */
+#button12 {
+    border: solid black 1px;
+}
+/*Clear button*/
+#button13 {
+    border: solid black 1px;
+}
+/* * button*/
+#button14 {
+    border: solid black 1px;
 }
