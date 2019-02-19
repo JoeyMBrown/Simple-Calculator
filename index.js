@@ -1,4 +1,3 @@
-console.log('my init function was called');
 window.onload = init;
 
 function init () {
@@ -37,6 +36,11 @@ function init () {
     button12.onclick = onClickHandler("button/");
     button13.onclick = onClickHandler("clear");
     button14.onclick = onClickHandler("button*");
+    function onKeyPressHandler() {
+        return function() { model.compute(); };
+    }
+    inputText.onclick = onKeyPressHandler();
+    onkeypress = onKeyPressHandler();
 }
 
 var display = {
@@ -62,3 +66,43 @@ var display = {
   }
 }
 
+var model = {
+
+    compute: function() {
+        var inputText = document.getElementById("inputText");
+        var answerText = document.getElementById("answerText");
+
+        //for (var i = 0; i < values.length; i++) {
+
+            if (inputText.innerHTML.indexOf("+") >= 0) {
+                var values = inputText.innerHTML.split("+");
+
+                var equals = (Number(values[0]) + Number(values[1]));
+                answerText.innerHTML = equals;
+        } else if (inputText.innerHTML.indexOf("-") >= 0) {
+            var values = inputText.innerHTML.split("-");
+    
+            var equals = (Number(values[0]) - Number(values[1]));
+            answerText.innerHTML = equals;
+        } else if (inputText.innerHTML.indexOf("/") >= 0) {
+            var values = inputText.innerHTML.split("/");
+    
+            var equals = (Number(values[0]) / Number(values[1]));
+            answerText.innerHTML = equals;
+        } else if (inputText.innerHTML.indexOf("*") >= 0) {
+            var values = inputText.innerHTML.split("*");
+    
+            var equals = (Number(values[0]) * Number(values[1]));
+            answerText.innerHTML = equals;
+            }
+        //}
+    }
+}
+
+function handleKeyPress(e) {
+    var inputText = document.getElementById("inputText");
+
+    if (e.keyCode === 13) {
+        inputText.click();
+    }
+}
