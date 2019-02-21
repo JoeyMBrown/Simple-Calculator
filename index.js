@@ -49,18 +49,13 @@ function init () {
     inputText.onclick = onKeyPressHandler();
 
 //1. Note here, 13 is return key, 190 is decimal and 8 is backspace.
-//2. Backspace and decimal don't work? Hmmm...
-    onkeypress = function(e) {
+//2. Also note onkeypress doesn't support all keys, where onkeydown does.
+/*onkeypress*/onkeydown = function(e) {
         switch(e.keyCode) {
-            /*case 8:
+            case 8:
             button13.click();
             return false;
-            break;*/
-
-            /*case 190:
-            display.handleButtons("button15");
-            return false;
-            break;*/
+            break;
 
             case 13:
             inputText.click();
@@ -116,6 +111,11 @@ function init () {
             button9.click();
             return false;
             break;
+
+            case 190:
+            display.handleButtons("button.");
+            return false;
+            break;
         }
     }
 }
@@ -132,8 +132,8 @@ var display = {
         inputText.innerHTML = 0;
     } else if (inputText.innerHTML == 0) {
         inputText.innerHTML = button.charAt(6);
-    /*} else if (button.charAt(6) == ".") {
-        inputText.innerHTML = button.charAt(6);*/
+    } else if (button.charAt(6) == ".") {
+        inputText.innerHTML = inputText.innerHTML + button.charAt(6);
     } else if (button.charAt(6) == "+") {
         inputText.innerHTML = inputText.innerHTML + " " + button.charAt(6) + " ";
     } else if (button.charAt(6) == "-") {
@@ -149,39 +149,48 @@ var display = {
 }
 
 //1. sets 2 local vars equal to HTML elements.
-//2. Decides what operation should be computed. If there is a plus sign, it splits the values at the operator
-//and places them into an array "values". Then adds the 2 values that are split into the array setting them as
-//the variable "equals".
-//3. Lastly, answer.Text is updated with the result of the operation (equals).
+//2. Creates an empty array that will be update on submit. Splits input string into an array based on " ".
+//3. answer is first index of array. operator is [i], which starts at 1, loop iterates by 2, so odds will be operator.
+//4. number is set to first index after each operator.  if operator is +, add first index of array to all even indexes of array.
+//5. update answerText with final answer
+//Note - loops commented out good for testing.
 var model = {
 
     compute: function() {
         var inputText = document.getElementById("inputText");
         var answerText = document.getElementById("answerText");
 
-        //for (var i = 0; i < values.length; i++) {
+        var values = [];
 
-            if (inputText.innerHTML.indexOf("+") >= 0) {
-                var values = inputText.innerHTML.split("+");
+        if (inputText.innerHTML.indexOf("+") >= 0){
+            var values = inputText.innerHTML.split(" ");            
+        }else if(inputText.innerHTML.indexOf("-") >= 0){
+            var values = inputText.innerHTML.split(" ");
+        }else if(inputText.innerHTML.indexOf("*") >= 0){
+            var values = inputText.innerHTML.split(" ");
+        }else if(inputText.innerHTML.indexOf("/") >= 0){
+            var values = inputText.innerHTML.split(" ");
+        }
+        //alert(values + " Values before loop");
+        var answer = Number(values[0]);
+        //alert(answer + " Answer before loop");
 
-                var equals = (Number(values[0]) + Number(values[1]));
-                answerText.innerHTML = equals;
-        } else if (inputText.innerHTML.indexOf("-") >= 0) {
-            var values = inputText.innerHTML.split("-");
-    
-            var equals = (Number(values[0]) - Number(values[1]));
-            answerText.innerHTML = equals;
-        } else if (inputText.innerHTML.indexOf("/") >= 0) {
-            var values = inputText.innerHTML.split("/");
-    
-            var equals = (Number(values[0]) / Number(values[1]));
-            answerText.innerHTML = equals;
-        } else if (inputText.innerHTML.indexOf("*") >= 0) {
-            var values = inputText.innerHTML.split("*");
-    
-            var equals = (Number(values[0]) * Number(values[1]));
-            answerText.innerHTML = equals;
+        for(var i = 1; i < values.length + 1; i += 2){
+            var operator = values[i];
+            var number = Number(values[i + 1]);
+            //alert(values + " Values");
+            //alert(answer + " Answer right before addition")
+
+            if(operator === "+"){
+                answer += number;
+            }else if(operator === "-"){
+                answer -= number;
+            }else if(operator === "*"){
+                answer *= number;
+            }else if(operator === "/"){
+                answer /= number;
             }
-        //}
+        }
+        answerText.innerHTML = answer;
     }
 }
